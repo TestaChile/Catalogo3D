@@ -266,113 +266,92 @@
         </button>
     </div>
     
-    <div class="catalog">
-        <!-- Modelo 1 (Horizontal) -->
-        <div class="model-card" data-ar-type="horizontal">
-            <model-viewer
-                src="GLB_Standqr01.glb"
-                alt="Stand QR Pequeño"
-                auto-rotate
-                rotation-per-second="90deg"
-                ar
-                ar-modes="webxr scene-viewer quick-look"
-                camera-controls
-                shadow-intensity="1"
-                interaction-prompt="none"
-                xr-environment
-            >
-                <button slot="ar-button" class="ar-button">
-                    VER EN REALIDAD AUMENTADA
-                    <span class="ar-hint">(Coloca en una superficie plana)</span>
-                </button>
-            </model-viewer>
-            <div class="floating-description">
-                <strong>Medidas: 10cm de alto, 8cm de ancho, 5cm de base</strong> Soporte acrílico de 3mm de espesor.
-            </div>
-            <h3 class="model-title">Stand QR Pequeño</h3>
-        </div>
-        
-        <!-- Modelo 2 (Horizontal) -->
-        <div class="model-card" data-ar-type="horizontal">
-            <model-viewer
-                src="GLB_StandQR_Mediano.glb"
-                alt="Stand QR Mediano"
-                auto-rotate
-                rotation-per-second="90deg"
-                ar
-                ar-modes="webxr scene-viewer quick-look"
-                camera-controls
-                shadow-intensity="1"
-                interaction-prompt="none"
-                xr-environment
-            >
-                <button slot="ar-button" class="ar-button">
-                    VER EN REALIDAD AUMENTADA
-                    <span class="ar-hint">(Coloca en una superficie plana)</span>
-                </button>
-            </model-viewer>
-            <div class="floating-description">
-                <strong>Medidas: 20cm de alto, 8cm de ancho, 5cm de base</strong> Soporte de acrílico con Logo y texto grabado.
-            </div>
-            <h3 class="model-title">Stand QR Mediano</h3>
-        </div>
-        
-        <!-- Modelo 3 (Horizontal) -->
-        <div class="model-card" data-ar-type="horizontal">
-            <model-viewer
-                src="GLB_Standqr03.glb"
-                alt="Exhibidor QR Emprendedores"
-                auto-rotate
-                rotation-per-second="90deg"
-                ar
-                ar-modes="webxr scene-viewer quick-look"
-                camera-controls
-                shadow-intensity="1"
-                interaction-prompt="none"
-                xr-environment
-            >
-                <button slot="ar-button" class="ar-button">
-                    VER EN REALIDAD AUMENTADA
-                    <span class="ar-hint">(Coloca en una superficie plana)</span>
-                </button>
-            </model-viewer>
-            <div class="floating-description">
-                <strong>Próximamente modelo 3D</strong> ¡Estamos trabajando!
-            </div>
-            <h3 class="model-title">Exhibidor QR</h3>
-        </div>
-        
-        <!-- Modelo 4 (Vertical) -->
-        <div class="model-card" data-ar-type="vertical">
-            <model-viewer
-                src="GLB_LetreroQR_Personalizado.glb"
-                alt="Letrero Personalizado 30x30cm"
-                auto-rotate
-                rotation-per-second="90deg"
-                ar
-                ar-modes="webxr scene-viewer quick-look"
-                camera-controls
-                shadow-intensity="1"
-                interaction-prompt="none"
-                xr-environment
-            >
-                <button slot="ar-button" class="ar-button">
-                    VER EN REALIDAD AUMENTADA
-                    <span class="ar-hint">(Coloca en una pared)</span>
-                </button>
-            </model-viewer>
-            <div class="floating-description">
-                <strong>Medidas 30x30cm</strong> Base de terciado con logo en relieve y a color.
-            </div>
-            <h3 class="model-title">Letrero Personalizado 30x30cm</h3>
-        </div>
-    </div>
+    <!-- Contenedor del catálogo (se llenará dinámicamente) -->
+    <div class="catalog" id="catalog-container"></div>
     
     <!-- Footer -->
     <div class="footer">Testa Chile 2025</div>
 
     <script>
+        // CONFIGURACIÓN - Aquí defines todos tus modelos
+        const catalogConfig = {
+            models: [
+                {
+                    id: 'stand-qr-pequeno',
+                    title: 'Stand QR Pequeño Gogi',
+                    src: 'GLB_Standqr03.glb',
+                    description: '<strong>Medidas: 10cm de alto, 8cm de ancho, 5cm de base</strong> Soporte acrílico de 3mm de espesor.',
+                    arType: 'horizontal',
+                    arHint: '(Coloca en una superficie plana)',
+                    rotationSpeed: '90deg'
+                },
+                {
+                    id: 'stand-qr-mediano',
+                    title: 'Stand QR Mediano Jairoz',
+                    src: 'GLB_StandQR_Mediano_JAIROZ.glb',
+                    description: '<strong>Medidas: 20cm de alto, 8cm de ancho, 5cm de base</strong> Soporte de acrílico con Logo y texto grabado.',
+                    arType: 'horizontal',
+                    arHint: '(Coloca en una superficie plana)',
+                    rotationSpeed: '90deg'
+                },
+                {
+                    id: 'exhibidor-qr',
+                    title: 'Exhibidor QR',
+                    src: 'GLB_Standqr03.glb',
+                    description: '<strong>Próximamente modelo 3D</strong> ¡Estamos trabajando!',
+                    arType: 'horizontal',
+                    arHint: '(Coloca en una superficie plana)',
+                    rotationSpeed: '90deg'
+                },
+                {
+                    id: 'letrero-personalizado',
+                    title: 'Letrero Personalizado 30x30cm',
+                    src: 'GLB_StandQR_Mediano_JAIROZ.glb',
+                    description: '<strong>Medidas 30x30cm</strong> Base de terciado con logo en relieve y a color.',
+                    arType: 'vertical',
+                    arHint: '(Coloca en una pared)',
+                    rotationSpeed: '90deg'
+                }
+                // Para agregar más modelos, simplemente añade nuevos objetos aquí
+            ]
+        };
+
         document.addEventListener("DOMContentLoaded", function() {
+            const catalogContainer = document.getElementById('catalog-container');
+            
+            // Generar las cards de modelo dinámicamente
+            catalogConfig.models.forEach(model => {
+                const card = document.createElement('div');
+                card.className = 'model-card';
+                card.setAttribute('data-ar-type', model.arType);
+                
+                card.innerHTML = `
+                    <model-viewer
+                        src="${model.src}"
+                        alt="${model.title}"
+                        auto-rotate
+                        rotation-per-second="${model.rotationSpeed}"
+                        ar
+                        ar-modes="webxr scene-viewer quick-look"
+                        camera-controls
+                        shadow-intensity="1"
+                        interaction-prompt="none"
+                        xr-environment
+                    >
+                        <button slot="ar-button" class="ar-button">
+                            VER EN REALIDAD AUMENTADA
+                            <span class="ar-hint">${model.arHint}</span>
+                        </button>
+                    </model-viewer>
+                    <div class="floating-description">
+                        ${model.description}
+                    </div>
+                    <h3 class="model-title">${model.title}</h3>
+                `;
+                
+                catalogContainer.appendChild(card);
+            });
+
             // Configuración para iOS
             if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
                 document.querySelectorAll('model-viewer').forEach(viewer => {
