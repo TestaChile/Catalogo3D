@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Muestrario 3D | Testa Chile</title>
+    <title>Catalogo 3D | Testa Chile</title>
     <!-- Polyfill para navegadores antiguos -->
     <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js"></script>
     <!-- Versión fija de model-viewer -->
@@ -76,6 +76,9 @@
         }
         .social-btn.catalog { 
             background: #6e48aa; 
+        }
+        .social-btn.last-design { 
+            background: #4A90E2; /* Mismo azul que el botón AR */
         }
 
         /* NUEVO BOTÓN AR (ESTILO MINIMALISTA) */
@@ -165,9 +168,16 @@
         
         .model-title {
             font-weight: bold;
-            margin: 10px 0 5px;
+            margin: 10px 0 0;
             color: #333;
             font-size: 18px;
+        }
+        
+        .model-subtitle {
+            color: #666;
+            font-size: 14px;
+            margin: 0 0 5px;
+            font-style: italic;
         }
         
         /* LOGO */
@@ -209,6 +219,7 @@
                 overflow-x: auto;
                 justify-content: flex-start;
                 -webkit-overflow-scrolling: touch;
+                padding-bottom: 15px;
             }
             
             .catalog {
@@ -232,6 +243,7 @@
             .social-btn {
                 min-width: 100px;
                 font-size: 14px;
+                padding: 8px 12px;
             }
         }
     </style>
@@ -244,21 +256,24 @@
         </a>
     </div>
     
-    <h1>MUESTRARIO 3D | TESTA CHILE</h1>
+    <h1>CATÁLOGO 3D | TESTA CHILE</h1>
     
     <div class="description">
-        Bienvenido a nuestro <strong>Muestrario Interactivo.</strong> 
-        Explora nuestros Modelos 3D en realidad aumentada. 
+        Bienvenido a nuestro <strong>Catálogo 3D.</strong> 
+        Aquí podrás visualizar trabajos realizados para nuestros clientes. 
         Haz click sobre el modelo de tú interés para poder interactuar con él. 
         Desde dispositivos móviles podrás ver los Modelos 3D en Realidad Aumentada.
     </div>
     
-    <!-- Botones de redes sociales -->
+    <!-- Botones de redes sociales - ORDEN CORREGIDO -->
     <div class="social-buttons">
         <button class="social-btn instagram" onclick="window.open('https://www.instagram.com/testa.cl/', '_blank')">
             Instagram
         </button>
-        <button class="social-btn catalog" onclick="window.open('https://testachile.github.io/Ultimodiseno/', '_blank')">
+        <button class="social-btn catalog" onclick="window.open('https://testachile.github.io/Muestrario3D/', '_blank')">
+            Muestrario
+        </button>
+        <button class="social-btn last-design" onclick="window.open('https://testachile.github.io/Ultimodiseno/', '_blank')">
             Último diseño
         </button>
         <button class="social-btn whatsapp" onclick="window.open('https://wa.me/56953706307', '_blank')">
@@ -277,46 +292,31 @@
         const catalogConfig = {
             models: [
                 {
-                    id: 'stand-qr-pequeno',
-                    title: 'Stand QR Pequeño Gogi',
-                    src: 'GLB_Standqr03.glb',
-                    description: '<strong>Medidas: 10cm de alto, 8cm de ancho, 5cm de base</strong> Soporte acrílico de 3mm de espesor.',
+                    id: 'stand-qr-mediano',
+                    title: 'Stand QR Mediano Jairoz Catering',
+                    subtitle: 'Fabricación: 11 de Abril del 2025',
+                    src: 'GLB_StandQR_Mediano_JAIROZ.glb',
+                    description: '<strong>Medidas: 17cm de alto, 8cm de ancho, 5cm de base</strong> Soporte acrílico negro de 3mm de espesor.',
                     arType: 'horizontal',
                     arHint: '(Coloca en una superficie plana)',
                     rotationSpeed: '90deg'
                 },
                 {
-                    id: 'stand-qr-mediano',
-                    title: 'Stand QR Mediano Jairoz',
-                    src: 'GLB_StandQR_Mediano_JAIROZ.glb',
+                    id: 'stand-qr-pequeno',
+                    title: 'Stand QR Pequeño GOGI',
+                    subtitle: 'Fabricación: 8 de Abril del 2025',
+                    src: 'GLB_StandQR_03.glb',
                     description: '<strong>Medidas: 20cm de alto, 8cm de ancho, 5cm de base</strong> Soporte de acrílico con Logo y texto grabado.',
                     arType: 'horizontal',
                     arHint: '(Coloca en una superficie plana)',
                     rotationSpeed: '90deg'
                 },
                 {
-                    id: 'exhibidor-qr',
-                    title: 'Exhibidor QR',
-                    src: 'GLB_Standqr03.glb',
-                    description: '<strong>Próximamente modelo 3D</strong> ¡Estamos trabajando!',
-                    arType: 'horizontal',
-                    arHint: '(Coloca en una superficie plana)',
-                    rotationSpeed: '90deg'
-                },
-                {
                     id: 'letrero-personalizado',
-                    title: 'Letrero Personalizado 30x30cm',
+                    title: 'Escudo personalizado BlackSnake',
+                    subtitle: 'Fabricación: 4 de Abril del 2025',
                     src: 'GLB_StandQR_Mediano_JAIROZ.glb',
-                    description: '<strong>Medidas 30x30cm</strong> Base de terciado con logo en relieve y a color.',
-                    arType: 'vertical',
-                    arHint: '(Coloca en una pared)',
-                    rotationSpeed: '90deg'
-                },
-                {
-                    id: 'letrero-personalizado',
-                    title: 'Letrero Personalizado 30x30cm',
-                    src: 'GLB_StandQR_Mediano_JAIROZ.glb',
-                    description: '<strong>Medidas 30x30cm</strong> Base de terciado con logo en relieve y a color.',
+                    description: '<strong>Medidas 40x30cm</strong> Letrero de madera de terciado y acrílico. Logo personalizado con relieve.',
                     arType: 'vertical',
                     arHint: '(Coloca en una pared)',
                     rotationSpeed: '90deg'
@@ -356,6 +356,7 @@
                         ${model.description}
                     </div>
                     <h3 class="model-title">${model.title}</h3>
+                    <div class="model-subtitle">${model.subtitle}</div>
                 `;
                 
                 catalogContainer.appendChild(card);
