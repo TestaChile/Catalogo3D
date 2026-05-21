@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /product-builder.html
+
+Sitemap: https://andiworks.cl/sitemap.xml
